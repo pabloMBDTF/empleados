@@ -1,15 +1,22 @@
-<!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/foundation.min.css' %}">
 </head>
+
+<header style="border: solid red; height: 40px;">
+    <a href="">opcion 1</a>
+    <a href="">opcion 2</a>
+    <a href="">opcion 3</a>
+
+</header>
 <body>
-
-    <h1>hola desde la carpeta de tamplates</h1>
-    <h3>probando el patron de diseño :3</h3>
-
+    <h1 class="ejemplo1">Hola mundo</h1>
+    <h1 class="ejemplo2">Hola mundo</h1>
 </body>
 </html>

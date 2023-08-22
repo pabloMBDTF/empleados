@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+
+{% include "includes/header.html" %}
+
+<div class="grid-container">
+    <br>
+    <h1>Informacion  empleados</h1>
+    <br>
+    <!-- {{titulo}} -->
+</div>
+
+<div class="grid-x align-center">
+        <div class="cell large-7">
+            <div class="callout success">
+                <h3>Informacion del empleado</h3>
+                <p>Nombre: {{object.firstName}}</p>
+                <p>Apellido: {{object.lastName}}</p>
+                <p>Trabajo: {{object.job}}</p>
+                <p>Departamento: {{object.departamento}}</p>
+                <p>Habilidades: {{object.habilidades}}</p>
+            </div>    
+        </div>
+</div>
+
+
+
+{% endblock contenido %}

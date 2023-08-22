@@ -1,10 +1,56 @@
-<h1>hola</h1>
+{% extends 'base.html' %}
 
 
-<ul>
 
-    {% for i in lista %}
-        <li>{{i}}</li>
-    {% endfor %}
+{% block contenido %}
 
-</ul>
+{% include "includes/header.html" %}
+<div class="grid-container">
+    
+    <div class="grid-x">
+        <h1 class="cell">Lista de empleados</h1>
+        <form class="cell grid-x grid-margin-x" method="GET">{% csrf_token %}
+            <div class="cell large-7">
+                <input type="text" id="keyword" name="keyword" placeholder="Buscar empleado">
+            </div>
+            <div class="cell large-2">
+                <button type="submit" class="success button" >Buscar</button>
+            </div>
+        </form>
+        <div>
+            <table>
+                <thead>
+                  <tr>
+                    <th width="200">ID</th>
+                    <th>NOMBRE</th>
+                    <th width="150">APELLIDO</th>
+                    <th width="150">DEPARTAMENTO</th>
+                    <th width="150">ACCION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in lista %}
+                  <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.firstName}}</td>
+                    <td>{{i.lastName}}</td>
+                    <td>{{i.departamento}}</td>
+                    <td><a class="button warning" href="{% url 'empleados_app:empleadosInfo' i.id %}">Ver</a></td>
+                  </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- <br>
+    <h1>Lista de todos los Empleados</h1>
+    <br>
+    <ul>
+        {% for i in lista %}
+            <li>{{i}}</li>
+        {% endfor %}
+    </ul> -->
+</div>
+{% endblock contenido %}

@@ -1,0 +1,17 @@
+<h1>hola mundo</h1>
+
+<form method="GET">{% csrf_token %}
+    <input type="text" id="keyword" name="keyword" placeholder="ingrese la palabra clave">
+    <button type="submit">Buscar</button>
+</form>
+
+
+<h3>Lista de resultados: </h3>
+
+<ul>
+
+    {% for i in object_list %}
+        <li>{{i}}</li>
+    {% endfor %}
+
+</ul>

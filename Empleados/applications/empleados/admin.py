@@ -11,6 +11,7 @@ class EmpleadoAdmin(admin.ModelAdmin):
         'lastName',
         'departamento',
         'job',
+        'id',
     )
 
     # Buscador en el administrador
