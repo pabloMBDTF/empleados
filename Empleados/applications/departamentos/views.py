@@ -1,9 +1,8 @@
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.views.generic.edit import FormView
 from .forms import NewDepartamentoForm
 from applications.empleados.models import Empleado
 from .models import Departamento
+from django.views.generic import ListView
 
 # Create your views here.
 
@@ -33,3 +32,11 @@ class NewDepartamento(FormView):
             departamento = dep 
         )
         return super(NewDepartamento, self).form_valid(form)
+    
+
+ 
+ 
+class DepartamentoListView(ListView):
+    model = Departamento
+    template_name = "departamentos/listDepartamentos.html"
+    context_object_name = 'departamentos'

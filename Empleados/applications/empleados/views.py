@@ -4,6 +4,7 @@ from django.http import HttpRequest, HttpResponse
 from django.urls import reverse_lazy
 from django.db.models.query import QuerySet
 from django.shortcuts import render
+from django.template import Context
 from django.views.generic import (
     ListView,
     DetailView,
@@ -24,20 +25,25 @@ from .models import Empleado
 
 class ListAllEmpleados(ListView):
     template_name = 'empleados/empleadosLista.html'
-    # model = Empleado
     context_object_name = 'lista'
     paginate_by = 4
     ordering = 'firstName'
 
     def get_queryset(self):
-        print("********")
         palabraClave = self.request.GET.get("keyword", " ")
         lista = Empleado.objects.filter(
             nombreCompleto__icontains = palabraClave
         )
-        print('lista resultado: ', lista)
-
         return lista
+
+
+class ListaEmpleadosAdmin(ListView):
+    template_name = 'empleados/empleadosAdmin.html'
+    paginate_by = 10
+    context_object_name = 'empleados'
+    ordering = 'firstName'
+    model = Empleado
+
 
 
 
@@ -48,7 +54,8 @@ class ListAllEmpleados(ListView):
 #area
 class ListarPorArea(ListView):
     template_name = 'empleados/listByArea.html'
-
+    context_object_name = 'empAreas'
+    
     def get_queryset(self):
         # de esta manera se trae el parametro de el enlace 
         
@@ -58,6 +65,12 @@ class ListarPorArea(ListView):
         )
         
         return lista
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        area = str(self.kwargs['shortName'])
+        context['Area'] = area
+        return context
         # return super().get_queryset().filter(job=area)
 
 
@@ -123,8 +136,8 @@ class EmpleadoInfo (DetailView):
 class CrearEmpleado(CreateView):
     model = Empleado
     template_name = 'empleados/add.html'
-    fields = ['firstName', 'lastName', 'job', 'departamento', 'habilidades', 'hojaVida']
-    success_url = reverse_lazy('empleados_app:correcto')
+    fields = ['firstName', 'lastName', 'job', 'departamento', 'habilidades', 'hojaVida', 'img']
+    success_url = reverse_lazy('empleados_app:listaEmpladosAdmin')
 
     #esta funcion se ejecutara automaticamente cunado el proceso del formulario sea valido
     def form_valid(self, form):
@@ -149,7 +162,7 @@ class ActualizarEmpleado(UpdateView):
     model = Empleado
     template_name = 'empleados/actualizarEmpleados.html'
     fields = ['firstName', 'lastName', 'job', 'departamento', 'habilidades', 'hojaVida']
-    success_url = reverse_lazy('empleados_app:correcto')
+    success_url = reverse_lazy('empleados_app:listaEmpladosAdmin')
 
 
     # son dos metodos distintos el valid se llama cuando ya se verifica que los datos a guardar son validos, en cambi el 
@@ -169,7 +182,7 @@ class ActualizarEmpleado(UpdateView):
 class EliminarEmpleado (DeleteView):
     model = Empleado
     template_name = 'empleados/eliminarEmpleado.html'
-    success_url = reverse_lazy('empleados_app:correcto')
+    success_url = reverse_lazy('empleados_app:listaEmpladosAdmin')
 
 
 class Inicio (TemplateView):

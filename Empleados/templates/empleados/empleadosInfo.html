@@ -2,29 +2,50 @@
 
 {% load static %}
 
+
+{% block titulo %}
+    Informacion Empleado 
+{% endblock titulo %}
+    
+
 {% block contenido %}
 
 {% include "includes/header.html" %}
 
+
+
 <div class="grid-container">
-    <br>
-    <h1>Informacion  empleados</h1>
-    <br>
-    <!-- {{titulo}} -->
+    <div class="grid-x grid-margin-x align-center">
+        <div class="cell large-4 card" style="width: 300px; margin-top: 20;">
+            <div class="card-divider">
+            {{empleado.get_job_display}}
+            </div>
+            
+            {% if empleado.img %}
+                <img src="{{ empleado.img.url }}" alt="Imagen del empleado">
+            {% else %}
+                <img src="{% static 'img/ye.jpg' %}">
+            {% endif %}
+                
+            <div class="card-section">
+                <h3>Nombre: {{object.firstName}}</h3>
+                <p>Apellido: {{object.lastName}}</p>
+                <p>Departamento: {{object.departamento.shortName}}</p>
+                <p><span class="label">Habilidades: </span></p>
+                <ul class="vertical menu">
+                    
+                    {% for i in empleado.habilidades.all %}
+                        <li>{{i.habilidad}}</li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="grid-x align-center">
-        <div class="cell large-7">
-            <div class="callout success">
-                <h3>Informacion del empleado</h3>
-                <p>Nombre: {{object.firstName}}</p>
-                <p>Apellido: {{object.lastName}}</p>
-                <p>Trabajo: {{object.job}}</p>
-                <p>Departamento: {{object.departamento}}</p>
-                <p>Habilidades: {{object.habilidades}}</p>
-            </div>    
-        </div>
-</div>
+
+
 
 
 

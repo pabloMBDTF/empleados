@@ -36,6 +36,7 @@ class Empleado (models.Model):
     habilidades = models.ManyToManyField(Habilidades) 
     hojaVida = RichTextField(blank = True, null = True)
     # avatar = models.ImageField(upload_to = 'empleado', blank = True, null = True)
+    img = models.ImageField(upload_to='', blank = True, null = True)
 
 
     class Meta:

@@ -3,14 +3,17 @@
       <ul class="dropdown menu" data-dropdown-menu>
         <li class="menu-text">Empleados</li>
         <li><a href="{% url 'empleados_app:listarEmpleados' %}">Listar</a></li>
-        <li><a href="#">Departamentos</a></li>
-        <li><a href="#">Administrar</a></li>
+        <li><a href="{% url 'departamento_app:departamentoList' %}">Departamentos</a></li>
+        <li><a href="{% url 'empleados_app:listaEmpladosAdmin' %}">Administrar</a></li>
+        <li><a href="{% url 'departamento_app:nueboDepartamento' %}">Crear Departamento</a></li>
+
       </ul>
     </div>
     <div class="top-bar-right">
       <ul class="menu">
-        <li><input type="search" placeholder="Buscar empleado"></li>
-        <li><button type="button" class="button">Buscar</button></li>
+        <!-- <li><input type="search" placeholder="Buscar empleado"></li> -->
+        <!-- <li><button type="button" class="button">Añadir Empleados</button></li> -->
+        <li><a href="{% url 'empleados_app:crearEmp'%}" class="button">Añadir Empleados</a></li>
       </ul>
     </div>
 </div>
